@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+body {
+  padding: 2rem;
+}
+h1 {
+  font-size: 4rem;
+  padding: 2rem auto;
+}
+h2 {
+  font-size: 3.2rem;
+  padding: 2rem auto;
+}
+p {
+  line-height: 1.5;
+  font-size: 1.6rem;
+  padding-bottom: 1rem;
+}
+.container {
+  max-width: 80rem;
+}
