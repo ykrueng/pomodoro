@@ -16,6 +16,7 @@ body {
 h1 {
   font-size: 4rem;
   padding: 2rem auto;
+  text-align: center;
 }
 h2 {
   font-size: 3.2rem;
@@ -28,4 +29,51 @@ p {
 }
 .container {
   max-width: 80rem;
+}
+body {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(128, 128, 128, 0.8)), url(../img/tomato.jpg);
+  background-size: cover;
+  background-position: 25% 25%;
+}
+header {
+  color: #7A1004;
+  margin-bottom: 10rem;
+}
+.container {
+  background-color: #7A1004;
+  border-radius: 2rem;
+  color: hsl(22, 44%, 95%);
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+.container .timer--text {
+  width: 100%;
+  background-color: #DD4F0A;
+  border-radius: 2rem;
+  padding: 1.6rem;
+}
+.container .timer--buttons {
+  width: 100%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.container .timer--buttons .button {
+  margin: 2rem auto;
+  width: 20rem;
+  padding: 1rem;
+  background-color: #DD4F0A;
+  border-radius: 2rem;
+}
+.container .timer--buttons .button:hover {
+  color: #DD4F0A;
+  background-color: hsl(22, 44%, 95%);
+  transform: translateY(-0.6rem);
+  box-shadow: 0.1rem 0.6rem hsla(0, 0%, 53%, 0.4);
+  cursor: pointer;
+}
+.container .timer--buttons .button:active {
+  transform: translateY(-0.3rem);
+  box-shadow: 0.1rem 0.3rem hsla(0, 0%, 53%, 0.4);
 }
