@@ -37,7 +37,7 @@ body {
 }
 header {
   color: #7A1004;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 }
 .container {
   background-color: #7A1004;
@@ -61,19 +61,51 @@ header {
 }
 .container .timer--buttons .button {
   margin: 2rem auto;
-  width: 20rem;
+  max-width: 16rem;
+  width: 45%;
   padding: 1rem;
+  color: hsl(22, 44%, 95%);
   background-color: #DD4F0A;
   border-radius: 2rem;
 }
 .container .timer--buttons .button:hover {
   color: #DD4F0A;
   background-color: hsl(22, 44%, 95%);
-  transform: translateY(-0.6rem);
-  box-shadow: 0.1rem 0.6rem hsla(0, 0%, 53%, 0.4);
-  cursor: pointer;
 }
-.container .timer--buttons .button:active {
-  transform: translateY(-0.3rem);
-  box-shadow: 0.1rem 0.3rem hsla(0, 0%, 53%, 0.4);
+.container .timer--setting {
+  font-size: 2rem;
+}
+.container .timer--setting .setting--session,
+.container .timer--setting .setting--short-break,
+.container .timer--setting .setting--long-break {
+  text-align: center;
+}
+.container .timer--setting .setting--session .setting,
+.container .timer--setting .setting--short-break .setting,
+.container .timer--setting .setting--long-break .setting {
+  display: flex;
+  justify-content: center;
+  margin: 0.8rem 0 2rem 0;
+  text-align: center;
+}
+.container .timer--setting .setting--session .setting .setting--text,
+.container .timer--setting .setting--short-break .setting .setting--text,
+.container .timer--setting .setting--long-break .setting .setting--text {
+  width: 4rem;
+}
+.container .timer--setting .setting--session .setting .setting--button,
+.container .timer--setting .setting--short-break .setting .setting--button,
+.container .timer--setting .setting--long-break .setting .setting--button {
+  color: hsl(22, 44%, 95%);
+  width: 4rem;
+  text-align: center;
+  margin: 0 1.5rem;
+  background-color: #DD4F0A;
+  border-radius: 2rem;
+}
+.container .timer--setting .setting--session .setting .setting--button:hover,
+.container .timer--setting .setting--short-break .setting .setting--button:hover,
+.container .timer--setting .setting--long-break .setting .setting--button:hover {
+  color: #DD4F0A;
+  background-color: hsl(22, 44%, 95%);
 }

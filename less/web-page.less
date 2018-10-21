@@ -6,7 +6,7 @@ body {
 
 header {
   color: @color-btn;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 }
 
 .container {
@@ -32,22 +32,40 @@ header {
 
     .button {
       margin: 2rem auto;
-      width: 20rem;
+      max-width: 16rem;
+      width: 45%;
       padding: 1rem;
-      background-color: @color-bg;
+      .hover-swap-color(@color-font, @color-bg);
       border-radius: 2rem;
+    }
+  }
 
-      &:hover {
-        color: @color-bg;
-        background-color: @color-font;
-        transform: translateY(-.6rem);
-        box-shadow: .1rem .6rem hsla(0, 0%, 53%, 0.40);
-        cursor: pointer;
-      }
+  .timer--setting {
+    font-size: 2rem;
 
-      &:active {
-        transform: translateY(-.3rem);
-        box-shadow: .1rem .3rem hsla(0, 0%, 53%, 0.40);
+    .setting--session,
+    .setting--short-break,
+    .setting--long-break {
+      text-align: center;
+
+      .setting {
+        display: flex;
+        justify-content: center;
+        margin: .8rem 0 2rem 0;
+        text-align: center;
+
+        .setting--text {
+          width: 4rem;
+        }
+
+        .setting--button {
+          .hover-swap-color(@color-font, @color-bg);
+          width: 4rem;
+          text-align: center;
+          margin: 0 1.5rem;
+          background-color: @color-bg;
+          border-radius: 2rem;
+        }
       }
     }
   }
