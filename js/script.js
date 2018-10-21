@@ -8,13 +8,14 @@
       longBreak: 15
     },
     isRunning: false,
-    currentTimer: 25,
+    currentTimer: 2512,
     currentSession: 1 // 1 - session, 2 - short break, 3 - long break
   }
 
   const controller = {
     init: function() {
-      settingView.render();
+      settingView.init();
+      timerView.init();
     },
 
     getLength: function() {
@@ -29,6 +30,39 @@
     incLength(e) {
       timer.length[e]++;
       settingView.render();
+    },
+
+    getHeaderText: function() {
+      if (timer.currentSession === 1) return 'Session Time Left';
+      if (timer.currentSession === 2) return 'Short Break Time Left';
+      if (timer.currentSession === 3) return 'Long Break Time Left';
+
+      timerView.render();
+    },
+
+    getTimerText: function() {
+      const time = timer.currentTimer;
+      const hour = Math.floor(time/100);
+      let second = (time%100).toString();
+      if (second.length < 2) second = '0' + second;
+      return `${hour}:${second}`;
+    }
+  }
+
+  const timerView = {
+    init: function() {
+      this.headerText = document.getElementById('timer-text-header');
+      this.timerText = document.getElementById('timer-text-time');
+
+      this.render();
+    },
+
+    render: function() {
+      const headerText = controller.getHeaderText();
+      const timerText = controller.getTimerText();
+
+      this.headerText.textContent = headerText;
+      this.timerText.textContent = timerText;
     }
   }
 
@@ -64,5 +98,5 @@
     }
   }
 
-  settingView.init();
+  controller.init();
 })()
