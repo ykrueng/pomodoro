@@ -27,13 +27,17 @@
     },
 
     decLength(e) {
-      timer.length[e] === 0 || timer.length[e]--;
+      timer.length[e] === 1 || timer.length[e]--;
+      if (e === 'session') timer.currentTimer = timer.length.session * 60 * 1000;
       settingView.render();
+      timerView.render();
     },
 
     incLength(e) {
       timer.length[e]++;
+      if (e === 'session') timer.currentTimer = timer.length.session * 60 * 1000;
       settingView.render();
+      timerView.render();
     },
 
     getHeaderText: function() {
@@ -93,6 +97,7 @@
       }
 
       buttonView.render();
+      settingView.render();
     },
 
     getState: function() {
@@ -145,6 +150,7 @@
 
   const settingView = {
     init: function() {
+      this.setting = document.getElementById('setting');
       this.sessionText = document.getElementById('setting-text-0');
       this.shortBreakText = document.getElementById('setting-text-1');
       this.longBreakText = document.getElementById('setting-text-2');
@@ -169,9 +175,11 @@
 
     render: function() {
       const length = controller.getLength();
+      const isRunning = controller.getState();
       this.sessionText.textContent = length.session;
       this.shortBreakText.textContent = length.shortBreak;
       this.longBreakText.textContent = length.longBreak;
+      this.setting.style.display = isRunning ? 'none' : 'block';
     }
   }
 
