@@ -89,6 +89,7 @@
           }
 
           timer.currentTimer -= 1000;
+
           timerView.render();
         },1000)
       } else {
@@ -102,11 +103,20 @@
 
     getState: function() {
       return timer.isRunning;
+    },
+
+    getCurrentTimer: function() {
+      return timer.currentTimer;
+    },
+
+    getCurrentSession: function() {
+      return timer.currentSession;
     }
   }
 
   const timerView = {
     init: function() {
+      this.timerDisplay = document.getElementById('timer-text');
       this.headerText = document.getElementById('timer-text-header');
       this.timerText = document.getElementById('timer-text-time');
 
@@ -116,9 +126,25 @@
     render: function() {
       const headerText = controller.getHeaderText();
       const timerText = controller.getTimerText();
+      const timer = controller.getCurrentTimer();
+      const session = controller.getCurrentSession();
 
       this.headerText.textContent = headerText;
       this.timerText.textContent = timerText;
+
+      if (timer <= 10000) {
+        this.timerText.style.color = 'black';
+      } else {
+        timerView.timerText.style.color = 'white';
+      }
+
+      if (session === 'session') {
+        this.timerDisplay.style['background-color'] = '#DD4F0A';
+      } else if (session === 'shortBreak') {
+        this.timerDisplay.style['background-color'] = '#EB981C';
+      } else {
+        this.timerDisplay.style['background-color'] = '#F9C381';
+      }
     }
   }
 
