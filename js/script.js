@@ -2,19 +2,21 @@
   console.log('Pomodoro Clock is Running ...');
 
   const timer = {
+    defaultSetting: [25, 5, 15, 1], // 25mins session, 5mins short break, 15 mins long break, current session 1 (see currentSession below)
     length: {
-      session: 25,
+      session: 20,
       shortBreak: 5,
-      longBreak: 15
+      longBreak: 5
     },
     isRunning: false,
     currentTimer: 2512,
-    currentSession: 1 // 1 - session, 2 - short break, 3 - long break
+    currentSession: 2 // 1 - session, 2 - short break, 3 - long break
   }
 
   const controller = {
     init: function() {
       settingView.init();
+      buttonView.init();
       timerView.init();
     },
 
@@ -46,6 +48,19 @@
       let second = (time%100).toString();
       if (second.length < 2) second = '0' + second;
       return `${hour}:${second}`;
+    },
+
+    resetToDefault: function() {
+      timer.length = {
+        session: timer.defaultSetting[0],
+        shortBreak: timer.defaultSetting[1],
+        longBreak: timer.defaultSetting[2]
+      }
+
+      timer.currentSession = timer.defaultSetting[3];
+      timer.currentTimer = timer.length.session * 100;
+      timerView.render();
+      settingView.render();
     }
   }
 
@@ -63,6 +78,15 @@
 
       this.headerText.textContent = headerText;
       this.timerText.textContent = timerText;
+    }
+  }
+
+  const buttonView = {
+    init: function() {
+      this.resetButton = document.getElementById('button-reset');
+      this.resetButton.addEventListener('click', function() {
+        controller.resetToDefault();
+      })
     }
   }
 
