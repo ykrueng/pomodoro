@@ -168,8 +168,10 @@
 
       if (isRunning) {
         this.startButton.textContent = 'Pause';
+        this.resetButton.style.display = 'none';
       } else {
         this.startButton.textContent = 'Start';
+        this.resetButton.style.display = null;
       }
     }
   }
