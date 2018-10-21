@@ -27,13 +27,14 @@
     },
 
     decLength(e) {
-      timer.length[e] === 1 || timer.length[e]--;
+      timer.length[e] <= 1 || timer.length[e]--;
       if (e === 'session') timer.currentTimer = timer.length.session * 60 * 1000;
       settingView.render();
       timerView.render();
     },
 
     incLength(e) {
+      if (timer.length[e] < 1) timer.length[e] = 0;
       timer.length[e]++;
       if (e === 'session') timer.currentTimer = timer.length.session * 60 * 1000;
       settingView.render();
@@ -111,6 +112,18 @@
 
     getCurrentSession: function() {
       return timer.currentSession;
+    },
+
+    setDemo() {
+      timer.length = {
+        session: 25/60,
+        shortBreak: 5/60,
+        longBreak: 15/60
+      }
+
+      timer.currentTimer = timer.length.session * 60 * 1000;
+
+      timerView.render();
     }
   }
 
@@ -160,6 +173,12 @@
         controller.runTimer();
       })
 
+      this.demoButton = document.getElementById('demo');
+      this.demoButton.addEventListener('click', function() {
+        controller.setDemo();
+        controller.runTimer();
+      })
+
       this.render();
     },
 
@@ -204,9 +223,9 @@
     render: function() {
       const length = controller.getLength();
       const isRunning = controller.getState();
-      this.sessionText.textContent = length.session;
-      this.shortBreakText.textContent = length.shortBreak;
-      this.longBreakText.textContent = length.longBreak;
+      this.sessionText.textContent = length.session.toString().substring(0,4);
+      this.shortBreakText.textContent = length.shortBreak.toString().substring(0,4);
+      this.longBreakText.textContent = length.longBreak.toString().substring(0,4);
       this.setting.style.display = isRunning ? 'none' : 'block';
     }
   }

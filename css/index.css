@@ -39,6 +39,31 @@ header {
   color: #7A1004;
   margin-bottom: 6rem;
 }
+.button {
+  margin: 2rem auto;
+  max-width: 16rem;
+  width: 45%;
+  padding: 1rem;
+  color: hsl(22, 44%, 95%);
+  background-color: #DD4F0A;
+  border-radius: 2rem;
+}
+.button:hover {
+  color: #DD4F0A;
+  background-color: hsl(22, 44%, 95%);
+}
+.setting--button {
+  color: hsl(22, 44%, 95%);
+  width: 4rem;
+  text-align: center;
+  margin: 0 1.5rem;
+  background-color: #DD4F0A;
+  border-radius: 2rem;
+}
+.setting--button:hover {
+  color: #DD4F0A;
+  background-color: hsl(22, 44%, 95%);
+}
 .container {
   background-color: #7A1004;
   border-radius: 2rem;
@@ -58,19 +83,6 @@ header {
   font-size: 2rem;
   display: flex;
   justify-content: space-around;
-}
-.container .timer--buttons .button {
-  margin: 2rem auto;
-  max-width: 16rem;
-  width: 45%;
-  padding: 1rem;
-  color: hsl(22, 44%, 95%);
-  background-color: #DD4F0A;
-  border-radius: 2rem;
-}
-.container .timer--buttons .button:hover {
-  color: #DD4F0A;
-  background-color: hsl(22, 44%, 95%);
 }
 .container .timer--setting {
   font-size: 2rem;
@@ -92,20 +104,4 @@ header {
 .container .timer--setting .setting--short-break .setting .setting--text,
 .container .timer--setting .setting--long-break .setting .setting--text {
   width: 4rem;
-}
-.container .timer--setting .setting--session .setting .setting--button,
-.container .timer--setting .setting--short-break .setting .setting--button,
-.container .timer--setting .setting--long-break .setting .setting--button {
-  color: hsl(22, 44%, 95%);
-  width: 4rem;
-  text-align: center;
-  margin: 0 1.5rem;
-  background-color: #DD4F0A;
-  border-radius: 2rem;
-}
-.container .timer--setting .setting--session .setting .setting--button:hover,
-.container .timer--setting .setting--short-break .setting .setting--button:hover,
-.container .timer--setting .setting--long-break .setting .setting--button:hover {
-  color: #DD4F0A;
-  background-color: hsl(22, 44%, 95%);
 }
