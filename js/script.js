@@ -2,15 +2,17 @@
   console.log('Pomodoro Clock is Running ...');
 
   const timer = {
-    defaultSetting: [25, 5, 15, 1], // 25mins session, 5mins short break, 15 mins long break, current session 1 (see currentSession below)
+    defaultSetting: [25, 5, 15, 'session'], // 25mins session, 5mins short break, 15 mins long break, current session
+    pomodoro: 0, // track session repeat, long break in every forth break, short break for the rest.
     length: {
-      session: 20,
+      session: 25,
       shortBreak: 5,
-      longBreak: 5
+      longBreak: 15
     },
     isRunning: false,
-    currentTimer: 2512,
-    currentSession: 2 // 1 - session, 2 - short break, 3 - long break
+    currentTimer: 25 * 60 * 1000,
+    currentSession: 'session', // session, shortBreak, longBreak
+    interval: null
   }
 
   const controller = {
@@ -35,19 +37,19 @@
     },
 
     getHeaderText: function() {
-      if (timer.currentSession === 1) return 'Session Time Left';
-      if (timer.currentSession === 2) return 'Short Break Time Left';
-      if (timer.currentSession === 3) return 'Long Break Time Left';
+      if (timer.currentSession === 'session') return 'Session Time Left';
+      if (timer.currentSession === 'shortBreak') return 'Short Break Time Left';
+      if (timer.currentSession === 'longBreak') return 'Long Break Time Left';
 
       timerView.render();
     },
 
     getTimerText: function() {
-      const time = timer.currentTimer;
-      const hour = Math.floor(time/100);
-      let second = (time%100).toString();
-      if (second.length < 2) second = '0' + second;
-      return `${hour}:${second}`;
+      let minute = Math.floor(timer.currentTimer/ (60 * 1000));
+      let second = Math.floor((timer.currentTimer % (60 * 1000))/1000);
+      if (second.toString().length < 2) second = '0' + second;
+      if (minute.toString().length < 2) minute = '0' + minute;
+      return `${minute}:${second}`;
     },
 
     resetToDefault: function() {
@@ -58,9 +60,43 @@
       }
 
       timer.currentSession = timer.defaultSetting[3];
-      timer.currentTimer = timer.length.session * 100;
+      timer.currentTimer = timer.defaultSetting[0] * 60 * 1000;
       timerView.render();
       settingView.render();
+    },
+
+    runTimer: function() {
+      if (!timer.isRunning) {
+        timer.isRunning = true;
+        timer.interval = setInterval(function() {
+          if (timer.currentTimer === 0) {
+            if (timer.currentSession === 'session') {
+              timer.pomodoro++;
+              if (timer.pomodoro === 4) {
+                timer.currentSession = 'longBreak';
+                timer.pomodoro = 0;
+              } else {
+                timer.currentSession = 'shortBreak';
+              }
+            } else {
+              timer.currentSession = 'session';
+            }
+            timer.currentTimer = timer.length[timer.currentSession]* 60 * 1000;
+          }
+
+          timer.currentTimer -= 1000;
+          timerView.render();
+        },1000)
+      } else {
+        timer.isRunning = false;
+        clearInterval(timer.interval);
+      }
+
+      buttonView.render();
+    },
+
+    getState: function() {
+      return timer.isRunning;
     }
   }
 
@@ -87,6 +123,23 @@
       this.resetButton.addEventListener('click', function() {
         controller.resetToDefault();
       })
+
+      this.startButton = document.getElementById('button-start');
+      this.startButton.addEventListener('click', function() {
+        controller.runTimer();
+      })
+
+      this.render();
+    },
+
+    render: function() {
+      const isRunning = controller.getState();
+
+      if (isRunning) {
+        this.startButton.textContent = 'Pause';
+      } else {
+        this.startButton.textContent = 'Start';
+      }
     }
   }
 
